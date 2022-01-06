@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+## pikasso language
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+'.' - end of expression
 
-## Available Scripts
+'#' - variable
 
-In the project directory, you can run:
+e.g. #x = 5.
 
-### `yarn start`
+### operators
+'+' - addition
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+'-' - subtraction
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+'*' - multiplication
 
-### `yarn test`
+'/' - division
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+'=' - assignment
 
-### `yarn build`
+'!=' - not equal
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+'==' - equal
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+'<=' - less or equal
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+'>=' - greater or equal
 
-### `yarn eject`
+'<' - less
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+'>' - greater
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+'||' - or
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+'&&' - and
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+'!' - negation
 
-## Learn More
+### special values
+true
+false
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### loops
+for #elem in #start #end {
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+}
+
+while #condition {
+
+}
+
+### drawing
+
+bg #r #g #b
+
+fill #r #g #b #a
+
+border #r #g #b #width
+
+circle #x #y #r
+
+rect #x #y #w #h
+
+line #x1 #y1 #x2 #y2
