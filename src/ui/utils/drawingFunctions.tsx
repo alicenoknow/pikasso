@@ -50,6 +50,7 @@ export function drawCircle(
   borderColor: string,
   borderWidth: number
 ) {
+  console.warn("Color ", fill);
   return (
     <Circle
       key={x + y + r}

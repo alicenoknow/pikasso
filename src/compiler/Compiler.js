@@ -17,7 +17,7 @@ export class Compiler {
   }
 
   compile(object) {
-    let _x, _y, _w, _h, _r, _x1, _x2, _y1, _y2;
+    let _x, _y, _w, _h, _r, _g, _b, _x1, _x2, _y1, _y2, fill, borderWidth, borderColor;
     switch(object.type) {
       case "Program":
         this.compile(object.value);
@@ -43,10 +43,12 @@ export class Compiler {
         break;
       case "AssignmentStatement":
         this.variableMap.set(object.key.name, this.compile(object.value));
-        console.warn("Assigning ", object.key.name, this.compile(object.value))
         break;
       case "Color":
-        return this.rgbToHex(this.compile(object.r), this.compile(object.g), this.compile(object.b));
+        _r = this.compile(object.r);
+        _g = this.compile(object.g);
+        _b = this.compile(object.b);
+        return this.rgbToHex(_r, _g, _b);
       case "BorderStatement":
         this.compile(object.value)
         break;
@@ -61,27 +63,32 @@ export class Compiler {
         this.compile(object.object);
         break;
       case "CircleDefinition":
-        console.warn(_x, _y)
         _x = this.compile(object.x);
         _y = this.compile(object.y);
         _r = this.compile(object.r);
-        console.warn(_x, _y)
-
-        this.parsedInstructions = [...this.parsedInstructions, () => drawCircle(_x, _y, _r, this.fillColor, this.borderColor, this.borderWidth )]
+        fill = this.fillColor;
+        borderColor = this.borderColor;
+        borderWidth = this.borderWidth;
+        this.parsedInstructions = [...this.parsedInstructions, () => drawCircle(_x, _y, _r, fill, borderColor, borderWidth )]
         break;
       case "LineDefinition":
         _x1 = this.compile(object.x1);
         _y1 = this.compile(object.y1);
         _x2 = this.compile(object.x2);
         _y2 = this.compile(object.y2);
-        this.parsedInstructions = [...this.parsedInstructions, () => drawLine(_x1, _y1, _x2, _y2, this.fillColor, this.borderWidth )]
+        fill = this.fillColor;
+        borderWidth = this.borderWidth;
+        this.parsedInstructions = [...this.parsedInstructions, () => drawLine(_x1, _y1, _x2, _y2, fill, borderWidth )]
         break;
       case "RectDefinition":
         _x = this.compile(object.x);
         _y = this.compile(object.y);
         _w = this.compile(object.w);
         _h = this.compile(object.h);
-        this.parsedInstructions = [...this.parsedInstructions, () => drawRect(_x, _y, _w, _h, this.fillColor, this.borderWidth, this.borderColor )];
+        fill = this.fillColor;
+        borderWidth = this.borderWidth;
+        borderColor = this.borderColor;
+        this.parsedInstructions = [...this.parsedInstructions, () => drawRect(_x, _y, _w, _h, fill, borderWidth, borderColor )];
         break;
       case "Circle":
         this.compile(object.value);
@@ -101,7 +108,6 @@ export class Compiler {
       case "Subtraction":
         return this.compile(object.left) - this.compile(object.right);
       case "Multiplication":
-        console.warn(this.variableMap, " Multi ",object )
         return this.compile(object.left) * this.compile(object.right);
       case "Division":
         return this.compile(object.left) / this.compile(object.right);
