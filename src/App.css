@@ -39,7 +39,7 @@
 
 .error {
   margin-top: 5px;
-  min-height: '10%';
+  min-height: "10%";
   display: flex;
   color: firebrick;
   background-color: #ffd4d4;
@@ -50,10 +50,10 @@
 
 .success {
   margin-top: 5px;
-  min-height: '10%';
+  min-height: "10%";
   display: flex;
-  color:darkgreen;
-  background-color:lightgreen;
+  color: darkgreen;
+  background-color: lightgreen;
   flex-direction: column;
   justify-content: center;
 }
@@ -76,4 +76,8 @@
 .docs {
   padding: 20px;
   background-color: #def4ff;
+}
+
+.buttonContainer {
+  margin-top: 10px;
 }

@@ -1,22 +1,77 @@
 import React from "react";
+import { parse, SyntaxError } from "../compiler/grammar2";
 import CanvaOutput from "./CanvaOutput";
 import CodeInput from "./CodeInput";
 import ResponseWidget from "./ResponseWidget";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
+import { CompilationStatus } from "./utils/CompilationStatus";
+import { Compiler } from "../compiler/Compiler";
 
-export default class MainPage extends React.Component {
-    render () {
-        return (
-                <div className="mainPage">
-                    <div style={{marginTop: 10}}>
-                    <Button variant="outline-success">Compile</Button></div>
-                    <div className="flexRow">
-                        <CodeInput code='' setCode={() => {}}/>
-                        <CanvaOutput shapes=''/>
+interface Props {}
 
-                    </div>
-                    <ResponseWidget errors={'Oj nie dobrze'} showMessage={false}/>
-                </div>
-        );
+interface State {
+  rawCode: string | undefined;
+  compilationsStatus: CompilationStatus;
+  errorMessage: string | undefined;
+  instructions: (() => JSX.Element)[];
+}
+
+export default class MainPage extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      rawCode: undefined,
+      compilationsStatus: CompilationStatus.None,
+      errorMessage: undefined,
+      instructions: [],
+    };
+  }
+
+  parseRawCode = () => {
+    const { rawCode } = this.state;
+    if (rawCode) {
+      try {
+        const result = parse(rawCode);
+        const compiler = new Compiler();
+        const instructions = compiler.compile(result);
+        this.setState({
+          instructions: instructions,
+          compilationsStatus: CompilationStatus.Success,
+        });
+      } catch (err: any) {
+        let errorMessage;
+        if (err instanceof SyntaxError) {
+          errorMessage = err.format([{ source: rawCode, text: rawCode }]);
+        } else {
+          errorMessage = "Sorry, something went wrong :c";
+        }
+        console.warn(err);
+        this.setState({
+          errorMessage: errorMessage,
+          compilationsStatus: CompilationStatus.Error,
+        });
+      }
     }
+  };
+
+  render() {
+    const { compilationsStatus, instructions, errorMessage } = this.state;
+    return (
+      <div className="mainPage">
+        <div className="buttonContainer">
+          <Button variant="outline-success" onClick={() => this.parseRawCode()}>
+            Compile
+          </Button>
+        </div>
+        <div className="flexRow">
+          <CodeInput setCode={(code) => this.setState({ rawCode: code })} />
+          <CanvaOutput shapes={instructions} />
+        </div>
+        <ResponseWidget
+          errors={errorMessage}
+          compilationStatus={compilationsStatus}
+        />
+      </div>
+    );
+  }
 }
