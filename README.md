@@ -1,63 +1,23 @@
 ## pikasso language
 
-'.' - end of expression
+Simple language to generate shapes.
 
-'#' - variable
+Example:
+```
+border 0 0 0 2.
+a = 230.
+b = 80.
+c = 200.
 
-e.g. #x = 5.
-
-### operators
-'+' - addition
-
-'-' - subtraction
-
-'*' - multiplication
-
-'/' - division
-
-'=' - assignment
-
-'!=' - not equal
-
-'==' - equal
-
-'<=' - less or equal
-
-'>=' - greater or equal
-
-'<' - less
-
-'>' - greater
-
-'||' - or
-
-'&&' - and
-
-'!' - negation
-
-### special values
-true
-false
-
-### loops
-for #elem in #start #end {
-
+for i in 1 5 {
+  fill a b c.
+  a = a - 10.
+  b = b + 20.
+  c = c/2.
+  draw circle i*100 600 80.
+  fill c a b.
+  draw rect i*50 i*50 50 50.
 }
+```
 
-while #condition {
-
-}
-
-### drawing
-
-bg #r #g #b
-
-fill #r #g #b #a
-
-border #r #g #b #width
-
-circle #x #y #r
-
-rect #x #y #w #h
-
-line #x1 #y1 #x2 #y2
+![image](https://user-images.githubusercontent.com/56412617/150702701-b22cb101-d2d5-4754-8f25-d15009544cac.png)
