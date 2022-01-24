@@ -7821,6 +7821,11 @@
   "resolved" "https://registry.npmjs.org/path-type/-/path-type-4.0.0.tgz"
   "version" "4.0.0"
 
+"peggy@^1.2.0":
+  "integrity" "sha512-PQ+NKpAobImfMprYQtc4Egmyi29bidRGEX0kKjCU5uuW09s0Cthwqhfy7mLkwcB4VcgacE5L/ZjruD/kOPCUUw=="
+  "resolved" "https://registry.npmjs.org/peggy/-/peggy-1.2.0.tgz"
+  "version" "1.2.0"
+
 "performance-now@^2.1.0":
   "integrity" "sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns="
   "resolved" "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz"
@@ -10184,6 +10189,13 @@
   "integrity" "sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA=="
   "resolved" "https://registry.npmjs.org/tryer/-/tryer-1.0.1.tgz"
   "version" "1.0.1"
+
+"ts-pegjs@^1.2.1":
+  "integrity" "sha512-fvT1oBQKMO3+9MJSUELTIuwkMs0IXJ2iEUCIw6yIriz7agh+OAwAL5Q9y3WiqzxwNF+M+xuK676UVRZxBcaOmQ=="
+  "resolved" "https://registry.npmjs.org/ts-pegjs/-/ts-pegjs-1.2.1.tgz"
+  "version" "1.2.1"
+  dependencies:
+    "peggy" "^1.2.0"
 
 "tsconfig-paths@^3.12.0":
   "integrity" "sha512-e5adrnOYT6zqVnWqZu7i/BQ3BnhzvGbjEjejFXO20lKIKpwTaupkCPgEfv4GZK1IBciJUEhYs3J3p75FdaTFVg=="
