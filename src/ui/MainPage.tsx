@@ -63,7 +63,7 @@ export default class MainPage extends React.Component<Props, State> {
       <div className="mainPage">
         <div className="buttonContainer">
           <Button variant="outline-success" onClick={() => this.parseRawCode()}>
-            Compile
+            Draw
           </Button>
         </div>
         <div className="flexRow">

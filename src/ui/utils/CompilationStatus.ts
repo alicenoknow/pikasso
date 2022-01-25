@@ -1,5 +1,5 @@
 export enum CompilationStatus {
-    Success = "Compilation Successful",
+    Success = "Execution Successful",
     Error = "Error",
     None = "",
 }
