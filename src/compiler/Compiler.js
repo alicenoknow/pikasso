@@ -1,4 +1,7 @@
 import { drawCircle, drawLine, drawRect } from "../ui/utils/drawingFunctions";
+import InfiniteLoopError from "../ui/utils/InfiniteLoopError";
+
+const MAX_LOOP = 100000;
 
 export class Compiler {
   variableMap = new Map();
@@ -17,7 +20,7 @@ export class Compiler {
   }
 
   compile(object) {
-    let _x, _y, _w, _h, _r, _g, _b, _x1, _x2, _y1, _y2, fill, borderWidth, borderColor;
+    let _x, _y, _w, _h, _r, _g, _b, _x1, _x2, _y1, _y2, fill, borderWidth, borderColor, loopCounter;
     switch(object.type) {
       case "Program":
         this.compile(object.value);
@@ -29,14 +32,25 @@ export class Compiler {
         }
         break;
       case "WhileLoop":
+        loopCounter = 0;
         while (this.compile(object.test)) {
+          loopCounter++;
+          if (loopCounter === MAX_LOOP) {
+            throw new InfiniteLoopError('');
+          }
           this.compile(object.body)
         }
         break;
       case "ForLoop":
         const from = this.compile(object.from);
         const to = this.compile(object.to)
+        loopCounter = 0;
+
         for (let it = from; it < to; it++) {
+          loopCounter++;
+          if (loopCounter === MAX_LOOP) {
+            throw new InfiniteLoopError('');
+          }
           this.variableMap.set(object.iterator.name, it);
           this.compile(object.body);
         }
@@ -110,9 +124,9 @@ export class Compiler {
       case "Multiplication":
         return this.compile(object.left) * this.compile(object.right);
       case "Division":
-        return this.compile(object.left) / this.compile(object.right);
+        return parseInt(this.compile(object.left) / this.compile(object.right));
       case "Integer":
-        return object.value;
+        return parseInt(object.value);
       case "Or":
         return this.compile(object.left) || this.compile(object.right);
       case "And":

@@ -10,7 +10,7 @@ export function drawLine(
 ) {
   return (
     <Line
-      key={x1 + y1 + x2 + y2}
+      key={Math.random()}
       stroke={fill}
       points={[x1, y1, x2, y2]}
       strokeWidth={width}
@@ -29,7 +29,7 @@ export function drawRect(
 ) {
   return (
     <Rect
-      key={x + y + width + height}
+      key={Math.random()}
       x={x}
       y={y}
       width={width}
@@ -50,10 +50,9 @@ export function drawCircle(
   borderColor: string,
   borderWidth: number
 ) {
-  console.warn("Color ", fill);
   return (
     <Circle
-      key={x + y + r}
+      key={Math.random()}
       x={x}
       y={y}
       radius={r}

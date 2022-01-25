@@ -6,6 +6,7 @@ import ResponseWidget from "./ResponseWidget";
 import Button from "react-bootstrap/Button";
 import { CompilationStatus } from "./utils/CompilationStatus";
 import { Compiler } from "../compiler/Compiler";
+import InfiniteLoopError from "./utils/InfiniteLoopError";
 
 interface Props {}
 
@@ -42,6 +43,8 @@ export default class MainPage extends React.Component<Props, State> {
         let errorMessage;
         if (err instanceof SyntaxError) {
           errorMessage = err.format([{ source: rawCode, text: rawCode }]);
+        } else if (err instanceof InfiniteLoopError) {
+          errorMessage = "Infinite loop! Max number of iterations exceeded.";
         } else {
           errorMessage = "Sorry, something went wrong :c";
         }

@@ -15,7 +15,6 @@ Instruction
 
 __  = Whitespace*
 Whitespace = [ \t\r\n]
-VariableKeyword = "#"
 EOL = "." __
 
 ForKeyword = "for"
@@ -50,10 +49,10 @@ ForLoop = ForKeyword __ iterator:Identifier __ InKeyword __ from:ArithmeticState
       };
     }
     
-AssignmentStatement = name:Identifier __ "=" __ value:ArithmeticStatement __ EOL { 
+AssignmentStatement = key:Identifier __ "=" __ value:ArithmeticStatement __ EOL { 
   return {
         type: "AssignmentStatement",
-        key: name,
+        key,
         value,
   	   };}
 
@@ -64,9 +63,9 @@ ColorStatement = r:ArithmeticStatement __ g:ArithmeticStatement __ b:ArithmeticS
         b,
       };}
 
-BorderStatement = BorderKeyword __ borderDef:BorderDefinition __ EOL { return {
+BorderStatement = BorderKeyword __ value:BorderDefinition __ EOL { return {
         type: "BorderStatement",
-        value: borderDef,
+        value,
       };}
 
 BorderDefinition = color:ColorStatement __ width:ArithmeticStatement { return {
@@ -87,29 +86,29 @@ DrawStatement = DrawKeyword __ object:ObjectDefinition __ EOL { return {
 
 CircleDefinition = CircleObjectKeyword __ x:ArithmeticStatement __ y:ArithmeticStatement __ r:ArithmeticStatement { return {
         type: "CircleDefinition",
-        x: x,
-        y: y,
-        r: r,
+        x,
+        y,
+        r,
       };}
 LineDefinition = LineObjectKeyword __ x1:ArithmeticStatement __ y1:ArithmeticStatement __ x2:ArithmeticStatement __ y2:ArithmeticStatement { return {
         type: "LineDefinition",
-        x1: x1,
-        y1: y1,
-        x2: x2,
-        y2: y2,
+        x1,
+        y1,
+        x2,
+        y2,
       };}
 RectDefinition = RectObjectKeyword __ x:ArithmeticStatement __ y:ArithmeticStatement __ w:ArithmeticStatement __ h:ArithmeticStatement { return {
         type: "RectDefinition",
-        x: x,
-        y: y,
-        w: w,
-        h: h,
+        x,
+        y,
+        w,
+        h,
       };}
 
 ObjectDefinition
-= def:CircleDefinition { return { type: "Circle", value: def }; }
-/ def:LineDefinition { return { type: "Line", value: def }; }
-/ def:RectDefinition { return { type: "Rect", value: def }; }
+= value:CircleDefinition { return { type: "Circle", value, }; }
+/ value:LineDefinition { return { type: "Line", value, }; }
+/ value:RectDefinition { return { type: "Rect", value, }; }
 
 BooleanLiteral
   = TrueKeyword  { return { type: "Boolean", value: true }; }
