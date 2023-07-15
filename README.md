@@ -1,6 +1,6 @@
 ## pikasso language
 
-Simple language to generate shapes.
+Simple language and its compiler for generating shapes and figures.
 
 Example:
 ```
